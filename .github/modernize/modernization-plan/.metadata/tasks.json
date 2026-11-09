@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Modernization tasks for the SupplyChain Backend project.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-java-spring-boot",
+      "description": "Upgrade the backend to the documented Java 17 and Spring Boot 3.2 targets.",
+      "reason": "The project currently uses Java 8 and Spring Boot 2.7.18, which the repository roadmap identifies as prohibited legacy versions.",
+      "requirements": "Upgrade Java from 8 to 17 and Spring Boot from 2.7.18 to the roadmap target 3.2. Preserve backend API behavior and migrate APIs affected by the Spring Boot 3 transition. Update the Maven build and runtime configuration for the target versions.",
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "setupBaseline",
+      "id": "002-setupBaseline",
+      "description": "Capture the current backend behavior and establish the frozen test baseline.",
+      "reason": "The baseline supports post-modernization verification against the existing application behavior.",
+      "requirements": "Snapshot the project's main source directory, src, before code changes. Capture relevant API and business behavior and record mock strategies for external dependencies.",
+      "dependencies": []
+    },
+    {
+      "type": "infrastructure",
+      "id": "003-infrastructure-azure-bicep",
+      "description": "Generate Bicep definitions for the Azure resources named in the repository roadmap.",
+      "reason": "The roadmap requests Azure infrastructure definitions for the container application and its managed services.",
+      "requirements": "Generate Bicep for Azure Container Apps, Azure Service Bus, and Azure SQL Database. Generate IaC only; do not provision resources. Do not include resource IDs, subscription IDs, or connection strings.",
+      "skills": [
+        {
+          "name": "infrastructure-bicep-generation",
+          "location": "builtin"
+        }
+      ],
+      "iacType": "bicep",
+      "provision": false,
+      "dependencies": []
+    },
+    {
+      "type": "transform",
+      "id": "004-transform-mysql-to-azure-sql",
+      "description": "Move the backend persistence layer from MySQL to Azure SQL Database.",
+      "reason": "Azure SQL Database is named as the database target in the repository modernization roadmap.",
+      "requirements": "Replace the MySQL-specific persistence configuration and database dependency with Azure SQL Database compatibility. Preserve purchase order, inventory, and vendor persistence behavior and use managed identity for Azure authentication.",
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      },
+      "dependencies": [
+        "001-upgrade-java-spring-boot"
+      ]
+    },
+    {
+      "type": "transform",
+      "id": "005-transform-platform-libraries",
+      "description": "Replace RestTemplate and SLF4J usage with the documented platform APIs.",
+      "reason": "The repository roadmap prohibits these libraries in favor of APIs that support the platform service mesh and trace context.",
+      "requirements": "Replace the vendor rating HTTP call made with RestTemplate by the documented ServiceMesh SDK. Replace application SLF4J logging with the documented InternalLogger. Preserve external-call and logging behavior without expanding the change to unrelated APIs.",
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      },
+      "dependencies": [
+        "004-transform-mysql-to-azure-sql"
+      ]
+    },
+    {
+      "type": "transform",
+      "id": "006-transform-result-pattern",
+      "description": "Use the documented Result pattern for business validation outcomes.",
+      "reason": "The repository roadmap identifies exception-based business flow control as a prohibited pattern.",
+      "requirements": "Replace exception-based flow control in purchase-order creation with the documented Result<T> pattern. Preserve the existing validation rule and make the result visible through the relevant service and API behavior.",
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      },
+      "dependencies": [
+        "005-transform-platform-libraries"
+      ]
+    },
+    {
+      "type": "transform",
+      "id": "007-transform-credentials-to-key-vault",
+      "description": "Remove plaintext application credentials and use Azure Key Vault.",
+      "reason": "The application configuration contains default database and RabbitMQ credentials, also flagged by the assessment report.",
+      "requirements": "Remove plaintext credentials from application configuration and retrieve the required secrets from Azure Key Vault. Use managed identity to access Key Vault. Do not retain default passwords or add secrets to source control.",
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      },
+      "dependencies": [
+        "006-transform-result-pattern"
+      ]
+    },
+    {
+      "type": "transform",
+      "id": "008-transform-rabbitmq-to-servicebus",
+      "description": "Migrate RabbitMQ messaging to Azure Service Bus using the documented messaging API.",
+      "reason": "The repository roadmap identifies direct RabbitMQ usage as a prohibited integration and names Azure Service Bus as its target.",
+      "requirements": "Replace RabbitMQ publishing and dependencies with the project's custom messaging API backed by Azure Service Bus. Preserve order.created, inventory.alert, and approval.pending event behavior and use managed identity. Do not substitute a different messaging API for the documented custom API.",
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      },
+      "dependencies": [
+        "007-transform-credentials-to-key-vault"
+      ]
+    },
+    {
+      "type": "integrationTest",
+      "id": "009-integrationTest",
+      "description": "Build integration tests for migrated Azure services and run post-migration verification",
+      "reason": "Mock-mode verification is the default when no Azure test environment is specified.",
+      "requirements": "Verify the migrated persistence, messaging, secret access, and application behavior against the frozen baseline. Use mock mode for external Azure dependencies; do not require provisioned Azure resources.",
+      "dependencies": [
+        "001-upgrade-java-spring-boot",
+        "002-setupBaseline",
+        "003-infrastructure-azure-bicep",
+        "004-transform-mysql-to-azure-sql",
+        "005-transform-platform-libraries",
+        "006-transform-result-pattern",
+        "007-transform-credentials-to-key-vault",
+        "008-transform-rabbitmq-to-servicebus"
+      ]
+    },
+    {
+      "type": "containerization",
+      "id": "010-containerization",
+      "description": "Update the existing container build and runtime images for Java 17.",
+      "reason": "The repository roadmap requires replacing the Java 8 container images with compliant Java 17 images.",
+      "requirements": "Update the existing Dockerfile to use the documented Java 17 build image and distroless runtime image. Preserve the application's startup behavior.",
+      "dockerfilePath": "Dockerfile (existing; update)",
+      "dependencies": [
+        "009-integrationTest"
+      ]
+    },
+    {
+      "type": "security",
+      "id": "011-security-cve-remediation",
+      "description": "Scan project dependencies for known CVEs and remediate identified vulnerabilities.",
+      "reason": "Dependency security review is a required final step in the modernization plan.",
+      "requirements": "Scan project dependencies and upgrade vulnerable dependencies to the minimum patched versions. If remediation requires a major version upgrade, document the affected dependency, current and target versions, and breaking-change risk. Verify the project builds and tests pass.",
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      },
+      "dependencies": [
+        "010-containerization"
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "modernization-plan",
+    "projectName": "SupplyChain Backend",
+    "language": "java",
+    "createdAt": "2026-11-09T10:26:16Z",
+    "version": "1.0"
+  }
+}
