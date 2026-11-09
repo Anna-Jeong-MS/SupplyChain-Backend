@@ -1,0 +1,744 @@
+{
+  "version": "1.0.0",
+  "producer": "Java AppCAT CLI",
+  "metadata": {
+    "analysisStartTime": "2026-11-09T08:40:39.937862791Z",
+    "analysisEndTime": "2026-11-09T08:41:04.860776506Z",
+    "status": "Complete",
+    "privacyMode": "Protected",
+    "privacyModeHelpUrl": "https://aka.ms/appcat-privacy-mode",
+    "targetIds": [
+      "azure-appservice",
+      "azure-aks",
+      "azure-container-apps"
+    ],
+    "targetDisplayNames": [
+      "Azure App Service",
+      "Azure Kubernetes Service",
+      "Azure Container Apps"
+    ],
+    "capabilities": [
+      "openjdk25"
+    ],
+    "os": [
+      "linux",
+      "windows"
+    ],
+    "domains": [
+      "java-upgrade",
+      "cloud-readiness"
+    ],
+    "mode": "issue-only",
+    "minimumCveSeverity": "high"
+  },
+  "summary": {
+    "totalProjects": 1,
+    "totalIssues": 8,
+    "totalIncidents": 17,
+    "totalEffort": 76,
+    "charts": {
+      "severity": {
+        "mandatory": 5,
+        "optional": 7,
+        "potential": 5,
+        "information": 0
+      },
+      "category": {
+        "database-migration": 3,
+        "hardcoded-credential": 2,
+        "java-version-upgrade": 3,
+        "local-credential": 2,
+        "local-resource-access": 1,
+        "messaging-service-migration": 2,
+        "remote-communication": 4
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": ".",
+      "issues": 8,
+      "storyPoints": 76,
+      "properties": {
+        "appName": "supplychain-backend",
+        "jdkVersion": "8",
+        "frameworks": [
+          "Spring Boot",
+          "Spring"
+        ],
+        "languages": [
+          "Java",
+          "Python"
+        ],
+        "tools": [
+          "Maven"
+        ]
+      },
+      "incidents": [
+        {
+          "ruleId": "azure-message-queue-amqp-02000",
+          "incidentId": "d9e0dda9-1703-4f97-92b1-1dd40732f8ec",
+          "location": "pom.xml",
+          "locationKind": "File",
+          "line": 53,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "optional"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "optional"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "optional"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-message-queue-amqp-02000",
+          "incidentId": "11513829-24ad-4c74-8c7d-b30e0522d701",
+          "location": "",
+          "locationKind": "",
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "optional"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "optional"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "optional"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-java-version-02000",
+          "incidentId": "a3b63541-e07d-465f-8f07-1651b522df72",
+          "location": "pom.xml",
+          "locationKind": "File",
+          "line": 24,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 8,
+              "severity": "optional"
+            },
+            "azure-appservice": {
+              "effort": 8,
+              "severity": "optional"
+            },
+            "azure-container-apps": {
+              "effort": 8,
+              "severity": "optional"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-java-version-02000",
+          "incidentId": "bbc55407-2c92-4704-9fb4-1f3140783401",
+          "location": "pom.xml",
+          "locationKind": "File",
+          "line": 25,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 8,
+              "severity": "optional"
+            },
+            "azure-appservice": {
+              "effort": 8,
+              "severity": "optional"
+            },
+            "azure-container-apps": {
+              "effort": 8,
+              "severity": "optional"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-java-version-02000",
+          "incidentId": "447ae615-7a10-4b56-a634-6f9868d8e0ac",
+          "location": "pom.xml",
+          "locationKind": "File",
+          "line": 26,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 8,
+              "severity": "optional"
+            },
+            "azure-appservice": {
+              "effort": 8,
+              "severity": "optional"
+            },
+            "azure-container-apps": {
+              "effort": 8,
+              "severity": "optional"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-database-mysql-01000",
+          "incidentId": "cca2295a-422e-4f53-9334-3be1737eae12",
+          "location": "pom.xml",
+          "locationKind": "File",
+          "line": 46,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-database-mysql-01000",
+          "incidentId": "a6697cae-822c-4152-8b44-5d34b289d263",
+          "location": "src/main/resources/application.yml",
+          "locationKind": "File",
+          "line": 11,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-database-mysql-01000",
+          "incidentId": "2ca8049a-5f02-400a-802d-0d6476291e87",
+          "location": "",
+          "locationKind": "",
+          "targets": {
+            "azure-aks": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 5,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 5,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-password-01000",
+          "incidentId": "5cb49b67-6fe3-4225-8274-c9827e7b4459",
+          "location": "src/main/resources/application.yml",
+          "locationKind": "File",
+          "line": 13,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "azure-password-01000",
+          "incidentId": "2c750d4b-b810-4a7f-bbfc-9c35be190c22",
+          "location": "src/main/resources/application.yml",
+          "locationKind": "File",
+          "line": 31,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "potential"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "potential"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=azure/springboot"
+          ]
+        },
+        {
+          "ruleId": "unsecure-network-protocol-00000",
+          "incidentId": "9e7d5b5f-7c0e-4505-adb4-96d65261042b",
+          "location": "src/main/java/com/acme/scm/service/VendorService.java",
+          "locationKind": "File",
+          "line": 49,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "unsecure-network-protocol-00000",
+          "incidentId": "1bfae567-0e9e-45cf-a56d-9f3ad8544f11",
+          "location": "src/main/java/com/acme/scm/SupplyChainBackendApplication.java",
+          "locationKind": "File",
+          "line": 25,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "hardcoded-urls-00001",
+          "incidentId": "b75294df-7cf6-42b5-a3a9-e10862b5d719",
+          "location": "src/main/java/com/acme/scm/SupplyChainBackendApplication.java",
+          "locationKind": "File",
+          "line": 25,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "optional"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "hardcoded-urls-00001",
+          "incidentId": "dcd64315-e072-4e29-964f-ee929b41db5a",
+          "location": "src/main/java/com/acme/scm/service/VendorService.java",
+          "locationKind": "File",
+          "line": 49,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "optional"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "optional"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "localhost-http-00001",
+          "incidentId": "b96caa03-5582-4149-ab24-ef8470ee59d2",
+          "location": "src/main/java/com/acme/scm/SupplyChainBackendApplication.java",
+          "locationKind": "File",
+          "line": 25,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "cra-hardcoded-credential-default-pwd-04000",
+          "incidentId": "23edc9b3-4dbe-40ed-9278-f4295ddb3ac9",
+          "location": "src/main/resources/application.yml",
+          "locationKind": "File",
+          "line": 13,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        },
+        {
+          "ruleId": "cra-hardcoded-credential-default-pwd-04000",
+          "incidentId": "76332f4a-3be3-4bc2-8f7a-21b98144ae17",
+          "location": "src/main/resources/application.yml",
+          "locationKind": "File",
+          "line": 31,
+          "column": 0,
+          "targets": {
+            "azure-aks": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-appservice": {
+              "effort": 3,
+              "severity": "mandatory"
+            },
+            "azure-container-apps": {
+              "effort": 3,
+              "severity": "mandatory"
+            }
+          },
+          "labels": [
+            "type=violation",
+            "ruleset=cloud-readiness"
+          ]
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "azure-database-mysql-01000": {
+      "id": "azure-database-mysql-01000",
+      "description": "To migrate a Java application that uses a MySQL database to Azure, you can follow these recommendations:\n\n * Use a managed **Azure Database for MySQL**: For that create a managed MySQL database in Azure and choose the appropriate pricing tier based on your application's requirements for performance, storage, and availability.\n\n * **Migrate** the existing MySQL database: For that you can use the Azure Database Migration Service (DMS) to perform an online migration with minimal downtime.\n\n * Update the application's **database connection** details: Modify the Java application's configuration to point to the newly provisioned Azure Database for MySQL. Update the connection string, hostname, port, username, and password information accordingly.\n\n * Enable **monitoring and diagnostics**: Utilize Azure Monitor to gain insights into the performance and health of your Java application and the underlying MySQL database. Set up metrics, alerts, and log analytics to proactively identify and resolve issues.\n\n * Implement **security** measures: Apply security best practices to protect your Java application and the MySQL database. This includes implementing authentication and authorization mechanisms with passwordless connections and leveraging Microsoft Defender for Cloud for threat detection and vulnerability assessments.\n\n * **Backup** your data: Azure Database for MySQL provides automated backups by default. You can configure the retention period for backups based on your requirements. You can also enable geo-redundant backups, if needed, to enhance data durability and availability.",
+      "title": "MySQL database found",
+      "severity": "potential",
+      "effort": 5,
+      "links": [
+        {
+          "url": "https://learn.microsoft.com/azure/mysql",
+          "title": "Azure Database for MySQL documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/dms",
+          "title": "Azure Database Migration Service documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/azure-monitor",
+          "title": "Azure Monitor documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/defender-for-cloud",
+          "title": "Microsoft Defender for Cloud"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/mysql/flexible-server/concepts-backup-restore",
+          "title": "Backup and restore in Azure Database for MySQL Flexible Server"
+        }
+      ],
+      "labels": [
+        "target=azure-appservice",
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "source",
+        "domain=cloud-readiness",
+        "category=database-migration",
+        "database",
+        "mysql",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "azure-java-version-02000": {
+      "id": "azure-java-version-02000",
+      "description": "The application is not using the latest LTS Java version. It is recommended to consider upgrading to the latest LTS version to take advantage of the newest language features, performance improvements, and extended support timelines.\nUpgrading to the latest LTS version ensures your application benefits from the most recent security enhancements and a longer support lifecycle.",
+      "title": "Java Version is not the latest LTS",
+      "severity": "optional",
+      "effort": 8,
+      "labels": [
+        "target=azure-appservice",
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "source",
+        "domain=java-upgrade",
+        "category=java-version-upgrade",
+        "version",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "azure-message-queue-amqp-02000": {
+      "id": "azure-message-queue-amqp-02000",
+      "description": "The application uses Spring AMQP dependency. To migrate a Java application that uses Spring AMQP to Azure, you can follow these recommendations:\n\n * Provision **Azure Service Bus**: Use Azure Service Bus, a fully managed messaging service that offers reliable message queuing and publish/subscribe capabilities.\n\n * Update the application's **messaging connection** details: Modify the Java application's configuration updating the connection information and message queues/topics.\n\n * Configure Azure Service Bus **queues/topics**: Create appropriate queues or topics in Azure Service Bus to align with your application's messaging requirements. Configure access control and security settings as needed.",
+      "title": "Spring AMQP dependency found",
+      "severity": "optional",
+      "effort": 5,
+      "links": [
+        {
+          "url": "https://learn.microsoft.com/azure/service-bus-messaging",
+          "title": "Azure Service Bus documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/developer/java/spring-framework/using-service-bus-in-spring-applications",
+          "title": "Use Azure Service Bus in Spring applications"
+        }
+      ],
+      "labels": [
+        "target=azure-appservice",
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "source",
+        "domain=cloud-readiness",
+        "category=messaging-service-migration",
+        "message-queue",
+        "AMQP Client",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "azure-password-01000": {
+      "id": "azure-password-01000",
+      "description": "Using clear passwords in property files is a security risk, as they can be easily compromised if the files are accessed by unauthorized individuals. To enhance the security of your application, it is recommended to employ secure credential management practices.\n\n * **Azure Key Vault**: Utilize Azure Key Vault to securely store and manage your application's passwords and other sensitive credentials. Azure Key Vault provides a centralized and highly secure location for storing secrets, keys, and certificates.\n\n * **Passwordless connections**: You can provide an additional layer of security and convenience for accessing resources in Azure by eliminating the need for passwords. This way you can reduce the risk of password-related vulnerabilities, such as weak passwords or password theft.",
+      "title": "Password found in configuration file",
+      "severity": "potential",
+      "effort": 3,
+      "links": [
+        {
+          "url": "https://learn.microsoft.com/azure/key-vault",
+          "title": "Azure Key Vault documentation"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/developer/intro/passwordless-overview",
+          "title": "Passwordless connections for Azure services"
+        },
+        {
+          "url": "https://learn.microsoft.com/azure/developer/java/migration/migrate-spring-boot-to-azure-container-apps#inventory-configuration-sources-and-secrets",
+          "title": "Password found in configuration file"
+        },
+        {
+          "url": "https://docs.microsoft.com/azure/developer/java/spring-framework/configure-spring-boot-starter-java-app-with-azure-key-vault",
+          "title": "Read a secret from Azure Key Vault in a Spring Boot application"
+        },
+        {
+          "url": "https://search.maven.org/artifact/com.azure.spring/azure-spring-boot-starter-keyvault-secrets",
+          "title": "Azure Spring Boot Starter for Azure Key Vault Secrets"
+        }
+      ],
+      "labels": [
+        "source",
+        "target=azure-appservice",
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "domain=cloud-readiness",
+        "category=local-credential",
+        "password",
+        "security",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "cra-hardcoded-credential-default-pwd-04000": {
+      "id": "cra-hardcoded-credential-default-pwd-04000",
+      "description": "**EU Cyber Resilience Act (Annex I, Part I, Section 2(b))** requires a **secure by default configuration**. The use of default, well-known, or trivial passwords violates the secure-by-default principle.\n\nETSI EN 303 645 (referenced standard for CRA compliance) explicitly prohibits universal default passwords in Provision 5.1-1.\n\n**Recommended actions:**\n* Remove all default/well-known passwords from code and configuration.\n* Require unique, strong passwords during initial setup.\n* Use generated secrets that are unique per deployment.\n* Implement password complexity requirements.",
+      "title": "CRA: Default or well-known password detected",
+      "severity": "mandatory",
+      "effort": 3,
+      "links": [
+        {
+          "url": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj",
+          "title": "EU Cyber Resilience Act - Regulation (EU) 2024/2847"
+        },
+        {
+          "url": "https://www.etsi.org/deliver/etsi_en/303600_303699/303645/02.01.01_60/en_303645v020101p.pdf",
+          "title": "ETSI EN 303 645 - No Universal Default Passwords"
+        }
+      ],
+      "labels": [
+        "source",
+        "domain=cloud-readiness",
+        "category=hardcoded-credential",
+        "security",
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "target=azure-appservice",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "hardcoded-urls-00001": {
+      "id": "hardcoded-urls-00001",
+      "description": "This patterns verifies in source code and configuration files the presence of hardcoded URLs using the HTTP protocol (HTTP/HTTPS). This URL would need to be replaced by the new resource's URL during the Cloud migration, if any change occured.",
+      "title": "Avoid using hardcoded URLs (HTTP protocol) in source code",
+      "severity": "optional",
+      "effort": 3,
+      "labels": [
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "target=azure-appservice",
+        "source",
+        "domain=cloud-readiness",
+        "category=remote-communication",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "localhost-http-00001": {
+      "id": "localhost-http-00001",
+      "description": "The app is trying to access local resource by HTTP, please try to migrate the resource to cloud",
+      "title": "Local HTTP Calls",
+      "severity": "mandatory",
+      "effort": 3,
+      "labels": [
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "target=azure-appservice",
+        "capability=containerization",
+        "source",
+        "domain=cloud-readiness",
+        "category=local-resource-access",
+        "localhost",
+        "containerization",
+        "os=windows",
+        "os=linux"
+      ]
+    },
+    "unsecure-network-protocol-00000": {
+      "id": "unsecure-network-protocol-00000",
+      "description": "Using secured protocols such as HTTPS and SFTP (over HTTP and FTP) should now be the norm as applications are more and more exposed and interconnected. \nThis CloudReady patterns looks for unescured URI in the source code or deprecated URI libraries. \nIdeally, URLs should be replaced in your source code by secured protocols HTTPS and SFTP (and ensure the infrastructure implements these protocols for the resources your application calls, uses or references).",
+      "title": "Use of unsecured network protocols or URI libraries",
+      "severity": "mandatory",
+      "effort": 3,
+      "links": [
+        {
+          "url": "https://developers.google.com/web/fundamentals/security/encrypt-in-transit/why-https",
+          "title": "Why HTTPS matters"
+        },
+        {
+          "url": "https://www.ssh.com/ssh/sftp/",
+          "title": "SSH File Transfer Protocol (SFTP): Get SFTP client & server"
+        }
+      ],
+      "labels": [
+        "target=azure-aks",
+        "target=azure-container-apps",
+        "target=azure-appservice",
+        "capability=containerization",
+        "source",
+        "domain=cloud-readiness",
+        "category=remote-communication",
+        "containerization",
+        "os=windows",
+        "os=linux"
+      ]
+    }
+  }
+}
